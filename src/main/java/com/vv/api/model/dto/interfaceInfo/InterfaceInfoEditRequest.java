@@ -46,6 +46,11 @@ public class InterfaceInfoEditRequest {
     private String responseHeader;
 
     /**
+     * 请求参数
+     */
+    private String requestParams;
+
+    /**
      * 接口状态（0-关闭，1-开启）
      */
     private Integer status;

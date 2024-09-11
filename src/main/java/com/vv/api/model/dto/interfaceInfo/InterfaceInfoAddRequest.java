@@ -39,6 +39,10 @@ public class InterfaceInfoAddRequest {
      */
     private String responseHeader;
 
+    /**
+     * 请求参数
+     */
+    private String requestParams;
 
     /**
      * 请求类型

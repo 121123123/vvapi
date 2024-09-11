@@ -1,16 +1,15 @@
 package com.vv.api.controller;
 
 import cn.hutool.core.util.ObjectUtil;
+import co.elastic.clients.ApiClient;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.google.gson.Gson;
 import com.vv.api.annotation.AuthCheck;
 import com.vv.api.common.*;
 import com.vv.api.constant.UserConstant;
 import com.vv.api.exception.BusinessException;
 import com.vv.api.exception.ThrowUtils;
-import com.vv.api.model.dto.interfaceInfo.InterfaceInfoAddRequest;
-import com.vv.api.model.dto.interfaceInfo.InterfaceInfoEditRequest;
-import com.vv.api.model.dto.interfaceInfo.InterfaceInfoQueryRequest;
-import com.vv.api.model.dto.interfaceInfo.InterfaceInfoUpdateRequest;
+import com.vv.api.model.dto.interfaceInfo.*;
 import com.vv.api.model.entity.InterfaceInfo;
 import com.vv.api.model.entity.User;
 import com.vv.api.model.enums.InterfaceInfoStatusEnum;
@@ -175,6 +174,38 @@ public class InterfaceInfoController {
         interfaceInfo.setStatus(InterfaceInfoStatusEnum.OFFLINE.getCode());
         boolean result = interfaceInfoService.updateById(interfaceInfo);
         return ResultUtils.success(result);
+    }
+
+    /**
+     * 接口调用
+     * @param
+     * @return
+     */
+    @PostMapping("/invoke")
+    @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
+    public BaseResponse<String> invokeInterfaceInfo(@RequestBody InvokeInterfaceInfoRequest invokeInterfaceInfoRequest, HttpServletRequest request) {
+        if (ObjectUtil.isEmpty(invokeInterfaceInfoRequest)){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 判断是否存在
+        InterfaceInfo interfaceInfo = interfaceInfoService.getById(invokeInterfaceInfoRequest.getId());
+        ThrowUtils.throwIf(interfaceInfo == null, ErrorCode.NOT_FOUND_ERROR);
+
+        if (interfaceInfo.getStatus() == InterfaceInfoStatusEnum.OFFLINE.getCode()){
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR,"接口已下线");
+        }
+
+        User loginUser = userService.getLoginUser(request);
+        String accessKey = loginUser.getAccessKey();
+        String secretKey = loginUser.getSecretKey();
+        VvApiClient vvApiClient = new VvApiClient(accessKey, secretKey);
+        String userRequestParams = invokeInterfaceInfoRequest.getUserRequestParams();
+        Gson gson = new Gson();
+
+        // 判断是否可以调用
+        com.vv.vvapiclientsdk.model.User user = gson.fromJson(userRequestParams, com.vv.vvapiclientsdk.model.User.class);
+        String userNameByPost = vvApiClient.getUserNameByPost(user);
+        return ResultUtils.success(userNameByPost);
     }
 
     /**

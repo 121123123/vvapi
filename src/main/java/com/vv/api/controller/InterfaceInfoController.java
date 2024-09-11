@@ -1,11 +1,9 @@
 package com.vv.api.controller;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.vv.api.annotation.AuthCheck;
-import com.vv.api.common.BaseResponse;
-import com.vv.api.common.DeleteRequest;
-import com.vv.api.common.ErrorCode;
-import com.vv.api.common.ResultUtils;
+import com.vv.api.common.*;
 import com.vv.api.constant.UserConstant;
 import com.vv.api.exception.BusinessException;
 import com.vv.api.exception.ThrowUtils;
@@ -15,10 +13,13 @@ import com.vv.api.model.dto.interfaceInfo.InterfaceInfoQueryRequest;
 import com.vv.api.model.dto.interfaceInfo.InterfaceInfoUpdateRequest;
 import com.vv.api.model.entity.InterfaceInfo;
 import com.vv.api.model.entity.User;
+import com.vv.api.model.enums.InterfaceInfoStatusEnum;
 import com.vv.api.model.vo.InterfaceInfoVO;
 import com.vv.api.service.InterfaceInfoService;
 import com.vv.api.service.UserService;
+import com.vv.vvapiclientsdk.client.VvApiClient;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 
- *
+ *接口管理
  * @@author vv
  *  
  */
@@ -41,6 +42,9 @@ public class InterfaceInfoController {
     
     @Resource
     private UserService userService;
+
+    @Resource
+    private VvApiClient apiClient;
 
     // region 增删改查
 
@@ -112,6 +116,63 @@ public class InterfaceInfoController {
         // 判断是否存在
         InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
         ThrowUtils.throwIf(oldInterfaceInfo == null, ErrorCode.NOT_FOUND_ERROR);
+        boolean result = interfaceInfoService.updateById(interfaceInfo);
+        return ResultUtils.success(result);
+    }
+
+    /**
+     * 接口上线（仅管理员）
+     * @param idRequest
+     * @return
+     */
+    @PostMapping("/online")
+    @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
+    public BaseResponse<Boolean> onlineInterfaceInfo(@RequestBody IdRequest idRequest) {
+        if (ObjectUtil.isEmpty(idRequest)){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 判断是否存在
+        InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(idRequest.getId());
+        ThrowUtils.throwIf(oldInterfaceInfo == null, ErrorCode.NOT_FOUND_ERROR);
+    //     判断是否可以调用
+        com.vv.vvapiclientsdk.model.User user = new com.vv.vvapiclientsdk.model.User();
+        user.setName("test");
+        String username = apiClient.getUserNameByPost(user);
+        if (StringUtils.isBlank(username)){
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR,"接口验证失败");
+        }
+        InterfaceInfo interfaceInfo = new InterfaceInfo();
+        interfaceInfo.setId(idRequest.getId());
+        interfaceInfo.setStatus(InterfaceInfoStatusEnum.ONLINE.getCode());
+        boolean result = interfaceInfoService.updateById(interfaceInfo);
+        return ResultUtils.success(result);
+    }
+
+    /**
+     * 接口下线（仅管理员）
+     * @param
+     * @return
+     */
+    @PostMapping("/offline")
+    @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
+    public BaseResponse<Boolean> offlineInterfaceInfo(@RequestBody IdRequest idRequest) {
+        if (ObjectUtil.isEmpty(idRequest)){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 判断是否存在
+        InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(idRequest.getId());
+        ThrowUtils.throwIf(oldInterfaceInfo == null, ErrorCode.NOT_FOUND_ERROR);
+        // 判断是否可以调用
+        com.vv.vvapiclientsdk.model.User user = new com.vv.vvapiclientsdk.model.User();
+        // 接口调用的细节(实现功能需要的参数)
+        user.setName("test");
+        String username = apiClient.getUserNameByPost(user);
+        if (StringUtils.isBlank(username)){
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR,"接口验证失败");
+        }
+        InterfaceInfo interfaceInfo = new InterfaceInfo();
+        interfaceInfo.setId(idRequest.getId());
+        interfaceInfo.setStatus(InterfaceInfoStatusEnum.OFFLINE.getCode());
         boolean result = interfaceInfoService.updateById(interfaceInfo);
         return ResultUtils.success(result);
     }

@@ -98,3 +98,7 @@ knife4j:
         api-rule: package
         api-rule-resources:
           - com.vv.api.controller
+vv:
+  client:
+    access-key: vvSir
+    secret-key: asdfgh

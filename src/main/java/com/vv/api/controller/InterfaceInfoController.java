@@ -26,10 +26,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 
- *接口管理
+ * 接口管理
+ *
  * @@author vv
- *  
  */
 @RestController
 @RequestMapping("/interfaceInfo")
@@ -38,7 +37,7 @@ public class InterfaceInfoController {
 
     @Resource
     private InterfaceInfoService interfaceInfoService;
-    
+
     @Resource
     private UserService userService;
 
@@ -51,7 +50,7 @@ public class InterfaceInfoController {
      * 创建接口
      *
      * @param addRequest 接口对应信息
-     * @param request 浏览器的request，用于获取当前登录用户
+     * @param request    浏览器的request，用于获取当前登录用户
      * @return
      */
     @PostMapping("/add")
@@ -121,24 +120,25 @@ public class InterfaceInfoController {
 
     /**
      * 接口上线（仅管理员）
+     *
      * @param idRequest
      * @return
      */
     @PostMapping("/online")
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
     public BaseResponse<Boolean> onlineInterfaceInfo(@RequestBody IdRequest idRequest) {
-        if (ObjectUtil.isEmpty(idRequest)){
+        if (ObjectUtil.isEmpty(idRequest)) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         // 判断是否存在
         InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(idRequest.getId());
         ThrowUtils.throwIf(oldInterfaceInfo == null, ErrorCode.NOT_FOUND_ERROR);
-    //     判断是否可以调用
+        //     判断是否可以调用
         com.vv.vvapiclientsdk.model.User user = new com.vv.vvapiclientsdk.model.User();
         user.setName("test");
         String username = apiClient.getUserNameByPost(user);
-        if (StringUtils.isBlank(username)){
-            throw new BusinessException(ErrorCode.SYSTEM_ERROR,"接口验证失败");
+        if (StringUtils.isBlank(username)) {
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "接口验证失败");
         }
         InterfaceInfo interfaceInfo = new InterfaceInfo();
         interfaceInfo.setId(idRequest.getId());
@@ -149,13 +149,14 @@ public class InterfaceInfoController {
 
     /**
      * 接口下线（仅管理员）
+     *
      * @param
      * @return
      */
     @PostMapping("/offline")
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
     public BaseResponse<Boolean> offlineInterfaceInfo(@RequestBody IdRequest idRequest) {
-        if (ObjectUtil.isEmpty(idRequest)){
+        if (ObjectUtil.isEmpty(idRequest)) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         // 判断是否存在
@@ -166,8 +167,8 @@ public class InterfaceInfoController {
         // 接口调用的细节(实现功能需要的参数)
         user.setName("test");
         String username = apiClient.getUserNameByPost(user);
-        if (StringUtils.isBlank(username)){
-            throw new BusinessException(ErrorCode.SYSTEM_ERROR,"接口验证失败");
+        if (StringUtils.isBlank(username)) {
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "接口验证失败");
         }
         InterfaceInfo interfaceInfo = new InterfaceInfo();
         interfaceInfo.setId(idRequest.getId());
@@ -178,21 +179,22 @@ public class InterfaceInfoController {
 
     /**
      * 接口调用
+     *
      * @param
      * @return
      */
     @PostMapping("/invoke")
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
     public BaseResponse<String> invokeInterfaceInfo(@RequestBody InvokeInterfaceInfoRequest invokeInterfaceInfoRequest, HttpServletRequest request) {
-        if (ObjectUtil.isEmpty(invokeInterfaceInfoRequest)){
+        if (ObjectUtil.isEmpty(invokeInterfaceInfoRequest)) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         // 判断是否存在
         InterfaceInfo interfaceInfo = interfaceInfoService.getById(invokeInterfaceInfoRequest.getId());
         ThrowUtils.throwIf(interfaceInfo == null, ErrorCode.NOT_FOUND_ERROR);
 
-        if (interfaceInfo.getStatus() == InterfaceInfoStatusEnum.OFFLINE.getCode()){
-            throw new BusinessException(ErrorCode.SYSTEM_ERROR,"接口已下线");
+        if (interfaceInfo.getStatus() == InterfaceInfoStatusEnum.OFFLINE.getCode()) {
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "接口已下线");
         }
 
         User loginUser = userService.getLoginUser(request);
@@ -251,7 +253,7 @@ public class InterfaceInfoController {
      */
     @PostMapping("/list/page/vo")
     public BaseResponse<Page<InterfaceInfoVO>> listInterfaceInfoVOByPage(@RequestBody InterfaceInfoQueryRequest interfaceInfoQueryRequest,
-            HttpServletRequest request) {
+                                                                         HttpServletRequest request) {
         long current = interfaceInfoQueryRequest.getCurrent();
         long size = interfaceInfoQueryRequest.getPageSize();
         // 限制爬虫
@@ -270,7 +272,7 @@ public class InterfaceInfoController {
      */
     @PostMapping("/my/list/page/vo")
     public BaseResponse<Page<InterfaceInfoVO>> listMyInterfaceInfoVOByPage(@RequestBody InterfaceInfoQueryRequest interfaceInfoQueryRequest,
-            HttpServletRequest request) {
+                                                                           HttpServletRequest request) {
         if (interfaceInfoQueryRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }

@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.vv.api.model.entity.Post;
 import com.vv.api.model.entity.PostFavour;
-import com.vv.api.model.entity.User;
+import com.vv.vvcommon.model.entity.User;
 
 /**
  * 帖子收藏服务

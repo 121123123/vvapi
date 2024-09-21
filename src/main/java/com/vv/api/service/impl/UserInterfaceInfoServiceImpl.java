@@ -4,26 +4,22 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.vv.api.common.ErrorCode;
 import com.vv.api.exception.BusinessException;
 import com.vv.api.model.dto.userInterfaceInfo.UserInterfaceInfoQueryRequest;
-import com.vv.api.model.entity.InterfaceInfo;
-import com.vv.api.model.entity.User;
-import com.vv.api.model.entity.UserInterfaceInfo;
 import com.vv.api.model.vo.UserInterfaceInfoVO;
 import com.vv.api.service.InterfaceInfoService;
 import com.vv.api.service.UserInterfaceInfoService;
 import com.vv.api.mapper.UserInterfaceInfoMapper;
 import com.vv.api.service.UserService;
+import com.vv.vvcommon.model.entity.InterfaceInfo;
+import com.vv.vvcommon.model.entity.User;
+import com.vv.vvcommon.model.entity.UserInterfaceInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author zx

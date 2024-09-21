@@ -11,7 +11,6 @@ import com.vv.api.constant.UserConstant;
 import com.vv.api.exception.BusinessException;
 import com.vv.api.exception.ThrowUtils;
 import com.vv.api.model.entity.Post;
-import com.vv.api.model.entity.User;
 import com.vv.api.service.PostService;
 import com.vv.api.service.UserService;
 import com.vv.api.model.dto.post.PostAddRequest;
@@ -23,6 +22,8 @@ import com.vv.api.model.vo.PostVO;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import com.vv.vvcommon.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.GetMapping;

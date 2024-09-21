@@ -1,7 +1,7 @@
 package com.vv.api.mapper;
 
-import com.vv.api.model.entity.InterfaceInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.vv.vvcommon.model.entity.InterfaceInfo;
 
 /**
 * @author zx

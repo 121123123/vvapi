@@ -3,9 +3,9 @@ package com.vv.api.service;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.vv.api.model.dto.interfaceInfo.InterfaceInfoQueryRequest;
-import com.vv.api.model.entity.InterfaceInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.vv.api.model.vo.InterfaceInfoVO;
+import com.vv.vvcommon.model.entity.InterfaceInfo;
 
 import javax.servlet.http.HttpServletRequest;
 

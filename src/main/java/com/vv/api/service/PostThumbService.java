@@ -1,8 +1,8 @@
 package com.vv.api.service;
 
 import com.vv.api.model.entity.PostThumb;
-import com.vv.api.model.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.vv.vvcommon.model.entity.User;
 
 /**
  * 帖子点赞服务

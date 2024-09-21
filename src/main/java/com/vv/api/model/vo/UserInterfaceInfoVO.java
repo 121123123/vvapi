@@ -1,6 +1,6 @@
 package com.vv.api.model.vo;
 
-import com.vv.api.model.entity.UserInterfaceInfo;
+import com.vv.vvcommon.model.entity.UserInterfaceInfo;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
 

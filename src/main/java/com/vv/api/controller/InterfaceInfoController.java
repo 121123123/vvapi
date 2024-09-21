@@ -1,7 +1,6 @@
 package com.vv.api.controller;
 
 import cn.hutool.core.util.ObjectUtil;
-import co.elastic.clients.ApiClient;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.gson.Gson;
 import com.vv.api.annotation.AuthCheck;
@@ -10,13 +9,13 @@ import com.vv.api.constant.UserConstant;
 import com.vv.api.exception.BusinessException;
 import com.vv.api.exception.ThrowUtils;
 import com.vv.api.model.dto.interfaceInfo.*;
-import com.vv.api.model.entity.InterfaceInfo;
-import com.vv.api.model.entity.User;
 import com.vv.api.model.enums.InterfaceInfoStatusEnum;
 import com.vv.api.model.vo.InterfaceInfoVO;
 import com.vv.api.service.InterfaceInfoService;
 import com.vv.api.service.UserService;
 import com.vv.vvapiclientsdk.client.VvApiClient;
+import com.vv.vvcommon.model.entity.InterfaceInfo;
+import com.vv.vvcommon.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;

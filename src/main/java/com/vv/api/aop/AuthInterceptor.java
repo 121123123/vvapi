@@ -1,9 +1,9 @@
 package com.vv.api.aop;
 
+import com.vv.vvcommon.model.entity.User;
 import com.vv.api.annotation.AuthCheck;
 import com.vv.api.common.ErrorCode;
 import com.vv.api.exception.BusinessException;
-import com.vv.api.model.entity.User;
 import com.vv.api.model.enums.UserRoleEnum;
 import com.vv.api.service.UserService;
 import org.aspectj.lang.ProceedingJoinPoint;

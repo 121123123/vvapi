@@ -2,12 +2,13 @@ package com.vv.api.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.vv.api.model.entity.User;
 import com.vv.api.model.dto.user.UserQueryRequest;
 import com.vv.api.model.vo.LoginUserVO;
 import com.vv.api.model.vo.UserVO;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+
+import com.vv.vvcommon.model.entity.User;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 
 /**

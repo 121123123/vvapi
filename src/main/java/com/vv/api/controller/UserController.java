@@ -10,7 +10,6 @@ import com.vv.api.config.WxOpenConfig;
 import com.vv.api.constant.UserConstant;
 import com.vv.api.exception.BusinessException;
 import com.vv.api.exception.ThrowUtils;
-import com.vv.api.model.entity.User;
 import com.vv.api.service.UserService;
 import com.vv.api.service.impl.UserServiceImpl;
 import com.vv.api.model.dto.user.UserAddRequest;
@@ -27,6 +26,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.vv.vvcommon.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;

@@ -9,17 +9,14 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.vv.api.common.ErrorCode;
 import com.vv.api.exception.BusinessException;
 import com.vv.api.model.dto.interfaceInfo.InterfaceInfoQueryRequest;
-import com.vv.api.model.entity.InterfaceInfo;
 import com.vv.api.model.vo.InterfaceInfoVO;
 import com.vv.api.service.InterfaceInfoService;
 import com.vv.api.mapper.InterfaceInfoMapper;
-import com.vv.api.service.UserService;
+import com.vv.vvcommon.model.entity.InterfaceInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 

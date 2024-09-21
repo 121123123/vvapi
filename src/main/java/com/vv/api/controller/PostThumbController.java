@@ -5,12 +5,13 @@ import com.vv.api.common.ErrorCode;
 import com.vv.api.common.ResultUtils;
 import com.vv.api.exception.BusinessException;
 import com.vv.api.model.dto.postthumb.PostThumbAddRequest;
-import com.vv.api.model.entity.User;
 import com.vv.api.service.PostThumbService;
 import com.vv.api.service.UserService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import com.vv.vvcommon.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

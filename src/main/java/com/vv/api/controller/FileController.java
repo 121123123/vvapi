@@ -7,7 +7,6 @@ import com.vv.api.common.ResultUtils;
 import com.vv.api.constant.FileConstant;
 import com.vv.api.exception.BusinessException;
 import com.vv.api.manager.CosManager;
-import com.vv.api.model.entity.User;
 import com.vv.api.model.enums.FileUploadBizEnum;
 import com.vv.api.service.UserService;
 import com.vv.api.model.dto.file.UploadFileRequest;
@@ -16,6 +15,8 @@ import java.io.File;
 import java.util.Arrays;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import com.vv.vvcommon.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.web.bind.annotation.PostMapping;

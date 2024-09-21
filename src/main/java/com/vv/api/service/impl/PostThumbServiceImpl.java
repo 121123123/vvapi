@@ -6,12 +6,13 @@ import com.vv.api.common.ErrorCode;
 import com.vv.api.mapper.PostThumbMapper;
 import com.vv.api.model.entity.Post;
 import com.vv.api.model.entity.PostThumb;
-import com.vv.api.model.entity.User;
 import com.vv.api.service.PostService;
 import com.vv.api.service.PostThumbService;
 import com.vv.api.exception.BusinessException;
 
 import javax.annotation.Resource;
+
+import com.vv.vvcommon.model.entity.User;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

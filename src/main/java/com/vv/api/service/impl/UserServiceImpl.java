@@ -9,7 +9,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.vv.api.common.ErrorCode;
 import com.vv.api.mapper.UserMapper;
-import com.vv.api.model.entity.User;
 import com.vv.api.model.enums.UserRoleEnum;
 import com.vv.api.service.UserService;
 import com.vv.api.utils.SqlUtils;
@@ -23,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
+
+import com.vv.vvcommon.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 import org.apache.commons.lang3.StringUtils;

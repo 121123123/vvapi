@@ -10,7 +10,6 @@ import com.vv.api.mapper.PostThumbMapper;
 import com.vv.api.model.entity.Post;
 import com.vv.api.model.entity.PostFavour;
 import com.vv.api.model.entity.PostThumb;
-import com.vv.api.model.entity.User;
 import com.vv.api.service.PostService;
 import com.vv.api.service.UserService;
 import com.vv.api.utils.SqlUtils;
@@ -30,6 +29,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import com.vv.vvcommon.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import cn.hutool.core.collection.CollUtil;
 import org.apache.commons.lang3.ObjectUtils;

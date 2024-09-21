@@ -9,7 +9,6 @@ import com.vv.api.exception.ThrowUtils;
 import com.vv.api.model.dto.postfavour.PostFavourAddRequest;
 import com.vv.api.model.dto.postfavour.PostFavourQueryRequest;
 import com.vv.api.model.entity.Post;
-import com.vv.api.model.entity.User;
 import com.vv.api.service.PostFavourService;
 import com.vv.api.service.PostService;
 import com.vv.api.service.UserService;
@@ -18,6 +17,8 @@ import com.vv.api.model.vo.PostVO;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import com.vv.vvcommon.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
